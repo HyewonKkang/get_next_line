@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <stdio.h>
 
 char	*read_and_store(int fd, char *backup)
@@ -77,14 +77,14 @@ char	*backup_next(char	*backup)
 char	*get_next_line(int fd)
 {
 	char		*buf;
-	static char	*backup;
+	static char	*backup[256];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd + 1 > 256 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!(backup = read_and_store(fd, backup)))
+	if (!(backup[fd] = read_and_store(fd, backup[fd])))
 		return (NULL);
-	buf = get_line(backup);
-	backup = backup_next(backup);
+	buf = get_line(backup[fd]);
+	backup[fd] = backup_next(backup[fd]);
 
 	return (buf);
 }
