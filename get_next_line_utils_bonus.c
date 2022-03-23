@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hykang <hykang@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 13:18:01 by hykang            #+#    #+#             */
+/*   Updated: 2022/03/23 13:18:02 by hykang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 char	*ft_strchr(char *s, int c)
@@ -22,11 +34,10 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-
 char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
-	int 	j;
+	int		j;
 	char	*str;
 
 	if (!s1)
@@ -35,14 +46,11 @@ char	*ft_strjoin(char *s1, char *s2)
 		s1[0] = '\0';
 	}
 	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!s1 || ! s2 || !str)
+	if (!s1 || !s2 || !str)
 		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
+	i = -1;
+	while (s1[++i])
 		str[i] = s1[i];
-		i++;
-	}
 	j = 0;
 	while (s2[j])
 	{

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hykang <hykang@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/23 13:17:25 by hykang            #+#    #+#             */
+/*   Updated: 2022/03/23 13:17:26 by hykang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 #include <stdio.h>
 
@@ -6,10 +18,13 @@ char	*read_and_store(int fd, char *backup)
 	char	*buf;
 	int		rbytes;
 
-	if (!(buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buf)
 		return (NULL);
-	while ((rbytes = read(fd, buf, BUFFER_SIZE)) != 0)
+	rbytes = 1;
+	while (rbytes != 0)
 	{
+		rbytes = read(fd, buf, BUFFER_SIZE);
 		if (rbytes == -1)
 		{
 			free(buf);
@@ -34,7 +49,8 @@ char	*get_line(char	*backup)
 		return (NULL);
 	while (backup[i] && backup[i] != '\n')
 		i++;
-	if (!(buf = (char *)malloc(sizeof(char) * (i + 1))))
+	buf = (char *)malloc(sizeof(char) * (i + 1));
+	if (!buf)
 		return (NULL);
 	i = 0;
 	while (backup[i] && backup[i] != '\n')
@@ -45,7 +61,6 @@ char	*get_line(char	*backup)
 	if (backup[i] == '\n')
 		buf[i++] = '\n';
 	buf[i] = '\0';
-
 	return (buf);
 }
 
@@ -63,7 +78,8 @@ char	*backup_next(char	*backup)
 		free(backup);
 		return (NULL);
 	}
-	if (!(buf = (char *)malloc(sizeof(char) * (ft_strlen(backup) - i + 1))))
+	buf = (char *)malloc(sizeof(char) * (ft_strlen(backup) - i + 1));
+	if (!buf)
 		return (NULL);
 	i++;
 	j = 0;
@@ -81,10 +97,10 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd + 1 > 256 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!(backup[fd] = read_and_store(fd, backup[fd])))
+	backup[fd] = read_and_store(fd, backup[fd]);
+	if (!backup[fd])
 		return (NULL);
 	buf = get_line(backup[fd]);
 	backup[fd] = backup_next(backup[fd]);
-
 	return (buf);
 }
