@@ -6,12 +6,11 @@
 /*   By: hykang <hykang@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 13:17:25 by hykang            #+#    #+#             */
-/*   Updated: 2022/03/23 13:17:26 by hykang           ###   ########.fr       */
+/*   Updated: 2022/04/14 16:10:11 by hykang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <stdio.h>
 
 char	*read_and_store(int fd, char *backup)
 {
@@ -49,7 +48,7 @@ char	*get_line(char	*backup)
 		return (NULL);
 	while (backup[i] && backup[i] != '\n')
 		i++;
-	buf = (char *)malloc(sizeof(char) * (i + 1));
+	buf = (char *)malloc(sizeof(char) * (i + 2));
 	if (!buf)
 		return (NULL);
 	i = 0;

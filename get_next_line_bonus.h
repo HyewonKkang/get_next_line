@@ -6,7 +6,7 @@
 /*   By: hykang <hykang@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 13:17:52 by hykang            #+#    #+#             */
-/*   Updated: 2022/03/23 13:17:53 by hykang           ###   ########.fr       */
+/*   Updated: 2022/03/28 10:25:08 by hykang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5000
+# endif
 
 char		*get_next_line(int fd);
 char		*get_line(char	*backup);
